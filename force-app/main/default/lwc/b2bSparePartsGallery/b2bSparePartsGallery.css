@@ -1,0 +1,143 @@
+:host {
+    display: grid;
+    grid-template-columns: 28.25rem 1fr;
+    grid-template-rows: 100%;
+    width: 100%;
+    height: 100%;
+    /* delegates scroll to inner component's panels */
+    max-height: 65vh;
+    font-family: Inter, sans-serif;
+    background-color: var(--b2b-color-grey-1);
+    border-radius: var(--b2b-radius-large);
+    overflow: hidden;
+}
+
+.parts {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+}
+
+.gallery__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.parts__container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--b2b-color-grey-3);
+}
+
+.search {
+    box-sizing: border-box;
+    width: calc(100% - 2px);
+    padding: 0.875rem 1.375rem;
+    line-height: 0.875rem;
+    margin: 1px;
+    border: none;
+    border-top-left-radius: calc(1rem - 1px);
+    border-top-right-radius: calc(1rem - 1px);
+}
+
+.parts__list {
+    /* 0.875rem * 3 - is the height of .search line height + it's vertical margin */
+    flex-grow: 1;
+    max-height: calc(100% - 0.875rem * 3);
+    overflow-y: auto;
+    border-top: 1px solid var(--b2b-color-grey-3);
+}
+
+.selected {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border-left: 1px solid #e7eaee;
+}
+
+/* Warranty table START */
+.table-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: var(--b2b-radius-large);
+}
+
+.table-container {
+    overflow: auto;
+}
+
+.table-scroller {
+    text-size-adjust: none;
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.skeleton-row:not(:first-of-type),
+.table__row {
+    border-top: 1px solid var(--b2b-color-grey-3);
+}
+
+.table__cell {
+    padding: 0.75rem 1rem;
+}
+
+.table__cell--description {
+    text-transform: capitalize;
+}
+
+.table__header .table__cell {
+    height: 0;
+    padding: 0 1rem;
+}
+/* Warranty table END */
+
+.appeal__header {
+    position: relative;
+    display: inline-block;
+    max-width: max-content;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+
+}
+
+.appeal__header::after {
+    content: "*";
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--b2b-color-accent-red);
+}
+
+.appeal__options {
+    display: grid;
+    grid-gap: 1rem;
+}
+
+.appeal__label {
+    font-size: 0.875rem;
+    line-height: 0.9375rem;
+}
+
+.appeal__radio {
+    display: inline-block;
+}
+
+.b2b-modal .slds-modal_medium .slds-modal__container {
+    width: 90vw;
+    max-width: 85rem;
+}
+
+.appeal__error {
+    display: inline-block;
+    color: var(--b2b-color-accent-red);
+}

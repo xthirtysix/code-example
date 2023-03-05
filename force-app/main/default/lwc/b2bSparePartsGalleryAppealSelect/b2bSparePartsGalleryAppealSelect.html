@@ -1,0 +1,24 @@
+<template>
+    <template if:true={isAvailable}>
+        <label class="b2b-checkbox">
+            <input type="checkbox"
+                   class="slds-var-m-right_small"
+                   onchange={onCheckboxChange}
+                   value={isEnabled}>
+            <span class="b2b-checkbox__label"
+                  role="presentation"></span>
+        </label>
+        <select class="b2b-select"
+                disabled={isSelectDisabled} onchange={onSelectChange}>
+            <option hidden
+                    disabled
+                    selected
+                    value>{placeholder}</option>
+            <template for:each={options}
+                      for:item="option">
+                <option key={option.value}
+                        value={option.value}>{option.label}</option>
+            </template>
+        </select>
+    </template>
+</template>

@@ -1,0 +1,75 @@
+<template>
+    <!-- Card text description -->
+    <div class="card__description-container slds-has-flexi-truncate">
+        <h4 if:true={productPart.description}
+            class="card__description slds-truncate">{productPart.description}</h4>
+        <p if:true={productPart.name}
+           class="card__header slds-truncate">{productPart.name}</p>
+    </div>
+    <!-- Card picture description -->
+    <p class="card__image">
+        <img src={productPart.image}
+             alt={productPart.name}>
+    </p>
+    <!-- Card expand/collapse button -->
+    <label class="card__button"
+           tabindex="0"
+           data-label={productPart.id}
+           onkeyup={onLabelKeypress}>
+        <input class="card__checkbox slds-hidden"
+               data-input={productPart.id}
+               tabindex="-1"
+               type="checkbox">
+        <span class="card__button-label"
+              role="presentation"></span>
+    </label>
+    <!-- Card form -->
+    <form class="card__form form slds-var-p-around_small"
+          onsubmit={onFormSubmit}>
+        <label class="form__label-container">
+            <span
+                  class="form__label slds-var-m-bottom_x-small slds-var-p-right_x-small">{labels.b2bSparePartsOldSN}</span>
+            <input class="form__input"
+                   data-id="old"
+                   type="text"
+                   required>
+        </label>
+
+        <label class="form__label-container">
+            <span
+                  class="form__label slds-var-m-bottom_x-small slds-var-p-right_x-small">{labels.b2bSparePartsNewSN}</span>
+            <input class="form__input"
+                   data-id="new"
+                   lwc:ref="newSerialNumber"
+                   type="text">
+        </label>
+
+        <div class="form__label-container">
+            <div
+                 class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-var-m-bottom_x-small slds-has-flexi-truncate">
+                <label
+                       class="form__label form__label--required slds-var-p-right_x-small slds-var-m-right_x-small">{labels.b2bSparePartsQuantity}</label>
+                <span class="form__label-tip slds-truncate"
+                      title={productPart.maxQtyMessage}>{productPart.maxQtyMessage}</span>
+            </div>
+            <div class="form__counter counter">
+                <button type="button"
+                        disabled={decrementDisabled}
+                        onclick={onDecrementClick}
+                        class="counter__button counter__button--decrement slds-var-p-horizontal_large">
+                    <span class="slds-assistive-text">-</span>
+                </button>
+                <span class="form__input">{quantityValue}</span>
+                <button type="button"
+                        disabled={incrementDisabled}
+                        onclick={onIncrementClick}
+                        class="counter__button counter__button--increment slds-var-p-horizontal_large">
+                    <span class="slds-assistive-text">+</span>
+                </button>
+            </div>
+        </div>
+        <button class="b2b-button form__button"
+                disabled={productPart.disabled}
+                type="submit">{labels.b2bSparePartsAddPart}</button>
+    </form>
+</template>

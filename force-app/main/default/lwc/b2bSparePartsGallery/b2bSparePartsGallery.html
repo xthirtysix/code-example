@@ -1,0 +1,66 @@
+<template>
+    <section class="parts slds-var-p-top_medium">
+        <div class="gallery__header slds-var-p-horizontal_large">
+            <h3 class="b2b-header">{labels.b2bSparePartsHeaderPartsGallery}</h3>
+            <a class="b2b-link"
+               href="#" onclick={onExposeSNClick}>{labels.b2bSparePartsExplodedView}</a>
+        </div>
+        <div class="parts__container b2b-card slds-var-m-around_large">
+            <label>
+                <input class="search"
+                       type="text"
+                       placeholder={labels.b2bSparePartsSearchPlaceholder}
+                       oninput={onSearchInput} />
+            </label>
+            <ul class="parts__list">
+                <template for:each={parts}
+                          for:item="part">
+                    <li key={part.id}>
+                        <c-b2b-spare-parts-gallery-card product-part={part}
+                                                        onaddpart={onAddPart}
+                                                        class="parts__card slds-var-p-around_xx-small"></c-b2b-spare-parts-gallery-card>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </section>
+    <section class="selected slds-var-m-bottom_large slds-var-p-top_medium">
+        <h3 class="b2b-header slds-var-p-horizontal_large">
+            {labels.b2bSparePartsHeaderSparePartsSelected}</h3>
+        <div class="table-wrapper slds-var-m-around_large">
+            <div class="table-container">
+                <c-b2b-spare-parts-table key-field="name"
+                                         data={selectedParts}
+                                         hide-checkbox-column="true"
+                                         min-column-width="0"
+                                         ondelete={onRowDelete}
+                                         onavailabilitychange={onAppealAvailabilityChange}
+                                         onappealchange={onAppealChange}
+                                         columns={partColumns}>
+                </c-b2b-spare-parts-table>
+            </div>
+        </div>
+        <template if:true={isRepairabilityVisible}>
+            <form class="appeal slds-var-m-horizontal_large">
+                <legend class="appeal__header slds-var-p-right_small slds-var-m-bottom_medium">
+                    {labels.b2bSparePartsRepairabilityStatusReport}</legend>
+                <template lwc:if={isRepairabilityError}>
+                    <span class="appeal__error slds-var-m-bottom_medium">{repairabilityError}</span>
+                </template>
+                <fieldset class="appeal__options">
+                    <template for:each={repairabilityRadioGroup} for:item="radio">
+                        <label class="appeal__label" key={radio.id}>
+                            <input type="radio"
+                                data-value={radio.value}
+                                class="appeal__radio slds-var-m-right_small"
+                                name="status"
+                                checked={radio.checked}
+                                onclick={onRadioClick}>
+                            {radio.label}
+                        </label>
+                    </template>
+                </fieldset>
+            </form>
+        </template>
+    </section>
+</template>
